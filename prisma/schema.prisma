@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+model Stop {
+  id        Int     @id @default(autoincrement())
+  stop_id   Int
+  stop_code String
+  stop_name String
+  stop_lat  Float
+  stop_lon  Float
+  zone_id   Int
+  alias     String?
+  stop_area String
+  stop_desc String?
+  lest_x    Float
+  lest_y    Float
+  zone_name String?
+  authority String?
+}
+
+model StopTimes {
+  id             Int    @id @default(autoincrement())
+  trip_id        Int
+  arrival_time   String
+  departure_time String
+  stop_id        Int
+  stop_sequence  Int
+  pickup_type    Int
+  drop_off_type  Int
+}
+
+model Route {
+  id                  Int     @id @default(autoincrement())
+  route_id            String
+  agency_id           Int
+  route_short_name    String
+  route_long_name     String?
+  route_type          Int?
+  route_color         String?
+  competent_authority String?
+  route_desc          String?
+}
+
+model Trip {
+  id                    Int     @id @default(autoincrement())
+  route_id              String
+  service_id            Int
+  trip_id               Int
+  trip_headsign         String?
+  trip_long_name        String?
+  direction_code        String?
+  shape_id              Int?
+  wheelchair_accessible Int?
+}
