@@ -88,13 +88,12 @@ export class BussService {
   }
 
   async getBusTime(dto: GetBusTimeDto){
-    const currentTime = new Date().toLocaleTimeString()
 
     const times = await this.prismaService.stopTimes.findMany({
       where: {
         stop_id: dto.stop_id,
         arrival_time: {
-          gt: currentTime
+          gt: dto.currentTime
         }
       },
       orderBy:{

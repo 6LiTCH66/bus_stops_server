@@ -7,4 +7,7 @@ export class GetBusTimeDto{
   
   @IsNotEmpty()
   route_short_name: string
+
+  @IsNotEmpty()
+  currentTime: string;
 }
