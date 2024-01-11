@@ -1,8 +1,10 @@
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsInt, IsNotEmpty } from "class-validator";
+import { Type } from "class-transformer";
 
 export class GetBusTimeDto{
-  @IsNumber()
   @IsNotEmpty()
+  @Type(() => Number)
+  @IsInt()
   stop_id: number
   
   @IsNotEmpty()

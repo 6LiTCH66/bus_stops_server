@@ -1,26 +1,26 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 import { BussService } from './buss.service';
 import { BusesDto, BusStopNameDto, GetBusesByLocationDto, GetBusTimeDto } from "./dto";
 
 @Controller('buss')
 export class BussController {
   constructor(private bussService: BussService) {}
-  @Post()
-  getStopName(@Body() dto: BusStopNameDto){
+  @Get()
+  getStopName(@Query() dto: BusStopNameDto){
     return this.bussService.getStopNames(dto)
   }
 
-  @Post('all')
-  getBusesForStop(@Body() dto: BusesDto){
+  @Get('all')
+  getBusesForStop(@Query() dto: BusesDto){
     return this.bussService.getBusesForStop(dto)
   }
-  @Post('location')
-  getBusesByLocation(@Body() dto: GetBusesByLocationDto){
+  @Get('location')
+  getBusesByLocation(@Query() dto: GetBusesByLocationDto){
     return this.bussService.getStopNamesByLocation(dto)
   }
 
-  @Post('location/bus-time')
-  getBusTime(@Body() dto: GetBusTimeDto){
+  @Get('location/bus-time')
+  getBusTime(@Query() dto: GetBusTimeDto){
     return this.bussService.getBusTime(dto)
   }
 
